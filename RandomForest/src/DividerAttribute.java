@@ -22,7 +22,8 @@ public class DividerAttribute {
                         biggerValues.add(sample);
                 }
 
-                double error = calcMSE(lowerValues)/lowerValues.size() + calcMSE(biggerValues)/biggerValues.size();
+                double error = calcMSE(lowerValues)*lowerValues.size() + calcMSE(biggerValues)*biggerValues.size();
+                error = error / samples.size();
                 if(error < minError) {
                     minError = error;
                     bestAttribute = i;

@@ -20,18 +20,19 @@ public class Main {
         DecisionTree tree = new DecisionTree(samplesFromFile);
         double eval = tree.getResultForSample(samplesFromFile.get(1));
         System.out.println(eval);
-        // for(Sample sample : samplesFromFile)
-//        System.out.println(tree.getResultForSample(sample));
+         for(Sample sample : samplesFromFile)
+        System.out.println(tree.getResultForSample(sample));
         //  System.out.println(sample.getResult());
-//    }
-        for (Node n : Node.nodes) {
-            System.out.println("----------node--------------");
-            if(n.divider!=null)
-                System.out.println(n.divider.getAttributeIndex() + ": " + n.divider.getValue());
-            else
-                System.out.println("leaf");
-            System.out.println(n.samples.size());
-        }
+
+//        System.out.println("Nodes total: "+Node.nodes.size());
+//        for (Node n : Node.nodes) {
+//            System.out.println("----------node--------------");
+//            if(n.divider!=null)
+//                System.out.println(n.divider.getAttributeIndex() + ": " + n.divider.getValue());
+//            else
+//                System.out.println("leaf");
+//            System.out.println(n.samples.size());
+//        }
     }
 
 
