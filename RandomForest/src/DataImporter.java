@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Collections;
 
 public class DataImporter {
 
@@ -29,4 +30,17 @@ public class DataImporter {
         }
         return samples;
     }
+
+    public void getTrainAndTest(ArrayList<Sample> train, ArrayList<Sample> test, double proportions) {
+        Collections.shuffle(samples);
+        train = new ArrayList<>();
+        test = new ArrayList<>();
+        for(int i =0; i < samples.size(); ++i){
+            if(i < samples.size()*proportions)
+                train.add(samples.get(i));
+            else
+                test.add(samples.get(i));
+        }
+    }
+
 }
