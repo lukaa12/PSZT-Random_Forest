@@ -6,7 +6,7 @@ public class DividerAttribute {
     private double value;
 
     public DividerAttribute(ArrayList<Sample> samples) {
-        int bestAttribute = 15;
+        int bestAttribute = -1;
         double divideValue = 0.0;
         double minError = 100000.0;
 

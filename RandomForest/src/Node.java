@@ -2,9 +2,15 @@ import java.util.ArrayList;
 
 public class Node {
 
+    public static ArrayList<Node> nodes = new ArrayList<>();
+
     Node lowerValuesSon, biggerValuesSon;
     ArrayList<Sample> samples;
     DividerAttribute divider;
+
+    public Node() {
+        nodes.add(this);
+    }
 
     public void setLowerValuesSon(Node lowerValuesSon) {
         this.lowerValuesSon = lowerValuesSon;

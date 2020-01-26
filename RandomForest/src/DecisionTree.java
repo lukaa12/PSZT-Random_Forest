@@ -12,7 +12,7 @@ public class DecisionTree {
 
     private Node ID3(ArrayList<Sample> samples, int depth) {
         //samples set is small or maxDepth reached - return leaf
-        if(samples.size() <= 5 || depth == maxDepth) {
+        if(samples.size() <= 5 || depth == 0) {
             Node leaf = new Node();
             leaf.setSamples(samples);
             return leaf;
@@ -20,6 +20,7 @@ public class DecisionTree {
 
         //find divider - its index in attribute array
         DividerAttribute divisionAttribute = new DividerAttribute(samples);
+//        System.out.println(divisionAttribute.getAttributeIndex()+": "+divisionAttribute.getValue());
         ArrayList<Sample> lowerValues = new ArrayList<>();
         ArrayList<Sample> biggerValues = new ArrayList<>();
 
@@ -32,8 +33,8 @@ public class DecisionTree {
         Node node = new Node();
         node.setDivider(divisionAttribute);
         node.setSamples(samples);
-        node.setLowerValuesSon(ID3(lowerValues,depth+1));
-        node.setBiggerValuesSon(ID3(biggerValues,depth+1));
+        node.setLowerValuesSon(ID3(lowerValues,depth-1));
+        node.setBiggerValuesSon(ID3(biggerValues,depth-1));
         return node;
     }
 
