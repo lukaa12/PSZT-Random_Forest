@@ -4,7 +4,7 @@ public class DecisionTree {
 
 
     Node root;
-    int maxDepth = 10;
+    int maxDepth = 12;
 
     public DecisionTree(ArrayList<Sample> samples) {
         root = ID3(samples,maxDepth);
@@ -12,15 +12,13 @@ public class DecisionTree {
 
     private Node ID3(ArrayList<Sample> samples, int depth) {
         //samples set is small or maxDepth reached - return leaf
-        if(samples.size() <= 5 || depth == 0) {
+        if(samples.size() <= 1 || depth == 0) {
             Node leaf = new Node();
             leaf.setSamples(samples);
             return leaf;
         }
-
         //find divider - its index in attribute array
         DividerAttribute divisionAttribute = new DividerAttribute(samples);
-//        System.out.println(divisionAttribute.getAttributeIndex()+": "+divisionAttribute.getValue());
         ArrayList<Sample> lowerValues = new ArrayList<>();
         ArrayList<Sample> biggerValues = new ArrayList<>();
 
