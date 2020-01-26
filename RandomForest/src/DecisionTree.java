@@ -4,7 +4,7 @@ public class DecisionTree {
 
 
     Node root;
-    int maxDepth = 30;
+    int maxDepth = 10;
 
     public DecisionTree(ArrayList<Sample> samples) {
         root = ID3(samples,maxDepth);

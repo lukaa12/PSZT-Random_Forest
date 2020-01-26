@@ -10,18 +10,20 @@ public class Main {
 
         ArrayList<Sample> samplesFromFile = importer.samplesFromFile("bostonHousingDataset.txt");
 
-        double sum = 0.0;
-        for (int i = 0; i < samplesFromFile.size(); i++)
-            sum += samplesFromFile.get(i).getResult();
+//        double sum = 0.0;
+//        for (int i = 0; i < samplesFromFile.size(); i++)
+//            sum += samplesFromFile.get(i).getResult();
 
-        double avg = sum / samplesFromFile.size();
-        System.out.println(avg);
-
+        //double avg = sum / samplesFromFile.size();
+        //System.out.println(avg);
+        double error = 0.0;
         DecisionTree tree = new DecisionTree(samplesFromFile);
-        double eval = tree.getResultForSample(samplesFromFile.get(1));
-        System.out.println(eval);
-         for(Sample sample : samplesFromFile)
-        System.out.println(tree.getResultForSample(sample));
+        for(Sample sample : samplesFromFile) {
+            error += (sample.getResult() - tree.getResultForSample(sample))*(sample.getResult() - tree.getResultForSample(sample));
+        }
+        error = error/samplesFromFile.size();
+        System.out.println(error);
+
         //  System.out.println(sample.getResult());
 
 //        System.out.println("Nodes total: "+Node.nodes.size());
