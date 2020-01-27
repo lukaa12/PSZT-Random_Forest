@@ -13,21 +13,24 @@ public class Main {
         test = importer.getTest();
         System.out.println(train.size() + "  " + test.size());
 
-        double error = 0.0;
-        Forest decision = new Forest();
-        decision.trainForest(train);
-        for(Sample sample: train) {
-            error += (sample.getResult() - decision.predict(sample))*(sample.getResult() - decision.predict(sample));
-        }
-        error = error/train.size();
-        System.out.println("Model performance on training set\nMSE: " + error);
 
-        error = 0.0;
-        for(Sample sample: test) {
-            error += (sample.getResult() - decision.predict(sample))*(sample.getResult() - decision.predict(sample));
+        for(int d = 6; d < 7; ++d) {
+            double error = 0.0;
+            Forest decision = new Forest();
+            decision.trainForest(train, test, d);
+//        for(Sample sample: train) {
+//            error += (sample.getResult() - decision.predict(sample))*(sample.getResult() - decision.predict(sample));
+//        }
+//        error = error/train.size();
+//        System.out.println("Model performance on training set\nMSE: " + error);
+
+            error = 0.0;
+            for (Sample sample : test) {
+                error += (sample.getResult() - decision.predict(sample)) * (sample.getResult() - decision.predict(sample));
+            }
+            error = error / test.size();
+//            System.out.println(error);
         }
-        error = error/test.size();
-        System.out.println("Model performance on testing set\nMSE: " + error);
 
 
     }

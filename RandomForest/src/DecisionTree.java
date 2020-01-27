@@ -16,7 +16,7 @@ public class DecisionTree {
 
     private Node ID3(ArrayList<Sample> samples, int depth) {
         //samples set is small or maxDepth reached - return leaf
-        if(samples.size() <= 1 || depth == 0) {
+        if(samples.size() <= 8 || depth == 0) {
             Node leaf = new Node();
             leaf.setSamples(samples);
             return leaf;

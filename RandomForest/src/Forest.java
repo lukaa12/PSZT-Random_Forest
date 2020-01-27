@@ -19,11 +19,15 @@ public class Forest {
     private ArrayList<WeakModel> ensemble;
     private ArrayList<Integer> attribs;
 
-    public void trainForest(ArrayList<Sample> training){
-        trainForest(training, (int)Math.sqrt(training.size()));
+    public void trainForest(ArrayList<Sample> training, ArrayList<Sample> test){
+        trainForest(training, test, (int)Math.sqrt(training.size()), 6);
     }
 
-    private void trainForest(ArrayList<Sample> training, int size){
+    public void trainForest(ArrayList<Sample> training, ArrayList<Sample> test, int depth) {
+        trainForest(training, test, (int)Math.sqrt(training.size()), depth);
+    }
+
+    private void trainForest(ArrayList<Sample> training, ArrayList<Sample> test, int size, int depth){
         ensemble = new ArrayList<>();
         attribs = new ArrayList<>();
         for(int x = 0; x < training.get(0).getAttributes().size(); ++x)
@@ -46,7 +50,7 @@ public class Forest {
                 set.add(new Sample(attr,tmp.getResult()));
             }
 
-            model.tree = new DecisionTree(set,6);
+            model.tree = new DecisionTree(set,depth);
 
             double modelMSE = 0.0;
             for(Sample s : training) {
@@ -60,6 +64,14 @@ public class Forest {
             model.mse = modelMSE;
             ensemble.add(model);
 //            System.out.println("Weak model MSE: " + model.mse);
+
+            double error = 0.0;
+            for(Sample sample: test) {
+                error += (sample.getResult() - predict(sample))*(sample.getResult() - predict(sample));
+            }
+            error = error/training.size();
+            System.out.println(error);
+
         }
 //        System.out.println("Size: "+ ensemble.size());
     }
@@ -72,6 +84,8 @@ public class Forest {
             if(m.mse>maxMSE)
                 maxMSE = m.mse;
         }
+        if(ensemble.size()==1)
+            maxMSE += 1.0;
         for(WeakModel model : ensemble){
             ArrayList<Double> attr = new ArrayList<>();
             for(Integer atr : model.attribs)
