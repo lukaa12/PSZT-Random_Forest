@@ -1,0 +1,9 @@
+
+# Default ignored files
+/.idea/workspace.xml
+
+/RandomForest/out/*
+/RandomForest/.idea/workspace.xml
+
+/tmp/*
+/.idea/*
