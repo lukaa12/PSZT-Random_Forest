@@ -2,7 +2,7 @@
 # Default ignored files
 /.idea/workspace.xml
 
-/RandomForest/out/*
+/RandomForest/out/production/RandomForest/*
 /RandomForest/.idea/workspace.xml
 
 /tmp/*
