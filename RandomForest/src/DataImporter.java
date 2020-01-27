@@ -9,6 +9,8 @@ import java.util.Collections;
 public class DataImporter {
 
     ArrayList<Sample> samples = new ArrayList<>();
+    ArrayList<Sample> train;
+    ArrayList<Sample> test;
 
     public ArrayList<Sample> samplesFromFile(String dataPath) throws IOException {
 
@@ -31,16 +33,25 @@ public class DataImporter {
         return samples;
     }
 
-    public void getTrainAndTest(ArrayList<Sample> train, ArrayList<Sample> test, double proportions) {
-        Collections.shuffle(samples);
-        train = new ArrayList<>();
-        test = new ArrayList<>();
-        for(int i =0; i < samples.size(); ++i){
-            if(i < samples.size()*proportions)
-                train.add(samples.get(i));
-            else
-                test.add(samples.get(i));
+    public ArrayList<Sample> getTrain(double proportions) {
+        if (train==null){
+            Collections.shuffle(samples);
+            train = new ArrayList<>();
+            test = new ArrayList<>();
+            for(int i =0; i < samples.size(); ++i){
+                if(i < samples.size()*proportions)
+                    train.add(samples.get(i));
+                else
+                    test.add(samples.get(i));
+            }
         }
+        return train;
+    }
+
+    public  ArrayList<Sample> getTest() {
+        if(test==null)
+            getTrain(0.8);
+        return test;
     }
 
 }

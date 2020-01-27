@@ -8,7 +8,7 @@ public class Sample {
 
     public Sample(ArrayList<Double> attr,
                   Double argResult) {
-        for(int i = 0; i < 13; i++) {
+        for(int i = 0; i < attr.size(); i++) {
             attributes.add(attr.get(i));
         }
         result = argResult;

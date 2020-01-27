@@ -6,6 +6,10 @@ public class DecisionTree {
     Node root;
     int maxDepth = 12;
 
+    public DecisionTree(ArrayList<Sample> training, int depth) {
+        root = ID3(training, depth);
+    }
+
     public DecisionTree(ArrayList<Sample> samples) {
         root = ID3(samples,maxDepth);
     }
@@ -27,6 +31,11 @@ public class DecisionTree {
                 lowerValues.add(sample);
             else
                 biggerValues.add(sample);
+        }
+        if(lowerValues.size()==0||biggerValues.size()==0) {
+            Node leaf = new Node();
+            leaf.setSamples(samples);
+            return leaf;
         }
         Node node = new Node();
         node.setDivider(divisionAttribute);
