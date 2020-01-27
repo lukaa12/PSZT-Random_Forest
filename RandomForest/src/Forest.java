@@ -20,7 +20,7 @@ public class Forest {
     private ArrayList<Integer> attribs;
 
     public void trainForest(ArrayList<Sample> training){
-        trainForest(training, 13);
+        trainForest(training, (int)Math.sqrt(training.size()));
     }
 
     private void trainForest(ArrayList<Sample> training, int size){
@@ -46,9 +46,10 @@ public class Forest {
                 set.add(new Sample(attr,tmp.getResult()));
             }
 
-            model.tree = new DecisionTree(set,3);
+            model.tree = new DecisionTree(set,6);
             ensemble.add(model);
         }
+        System.out.println("Size: "+ ensemble.size());
     }
 
     public double predict(Sample toPredict) {
